@@ -756,6 +756,7 @@ GMaps.prototype.removeMarkers = function (collection) {
 };
 
 GMaps.prototype.drawOverlay = function(options) {
+  console.log("We are in a method");
   var overlay = new google.maps.OverlayView(),
       auto_show = true;
 

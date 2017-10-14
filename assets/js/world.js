@@ -74,10 +74,8 @@ function ready(error, data, population) {
             .style("stroke-width",0.3);
         })
         .on('click', function(d) {
-            d3.select("body")
-              .append("div")
-              .html("<a href='index-2.html'></a>");
-            console.log("here")
+            d3.select("body").append("div").html("<a href='index-2.html'></a>");
+            console.log("here help")
         });
 
   svg.append("path")
