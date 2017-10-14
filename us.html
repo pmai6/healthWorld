@@ -2,7 +2,8 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- Place favicon.ico  the root directory -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -33,7 +34,10 @@
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="assets/css/responsive-map.css">
+
     </head>
+
     <body>
 
         <div id="preloader">
@@ -329,199 +333,14 @@
                             </form>
                         </div>
                         <br></br>
-                        <!-- <div class = "worldMap" id = "world"></div> -->
-                        <div class = "countryMap" id = "country">
-                            <svg width="960" height="600"></svg>
-                            <script>
-                                var svg = d3.select("svg"),
-                                    width = +svg.attr("width"),
-                                    height = +svg.attr("height");
-
-                                var unemployment = d3.map();
-
-                                var path = d3.geoPath();
-
-                                var x = d3.scaleLinear()
-                                    .domain([1, 10])
-                                    .rangeRound([600, 860]);
-
-                                var color = d3.scaleThreshold()
-                                    .domain(d3.range(2, 10))
-                                    .range(d3.schemeBlues[9]);
-
-                                var g = svg.append("g")
-                                    .attr("class", "key")
-                                    .attr("transform", "translate(0,40)");
-
-                                g.selectAll("rect")
-                                  .data(color.range().map(function(d) {
-                                      d = color.invertExtent(d);
-                                      if (d[0] == null) d[0] = x.domain()[0];
-                                      if (d[1] == null) d[1] = x.domain()[1];
-                                      return d;
-                                    }))
-                                  .enter().append("rect")
-                                    .attr("height", 8)
-                                    .attr("x", function(d) { return x(d[0]); })
-                                    .attr("width", function(d) { return x(d[1]) - x(d[0]); })
-                                    .attr("fill", function(d) { return color(d[0]); });
-
-                                g.append("text")
-                                    .attr("class", "caption")
-                                    .attr("x", x.range()[0])
-                                    .attr("y", -6)
-                                    .attr("fill", "#000")
-                                    .attr("text-anchor", "start")
-                                    .attr("font-weight", "bold")
-                                    .text("Unemployment rate");
-
-                                g.call(d3.axisBottom(x)
-                                    .tickSize(13)
-                                    .tickFormat(function(x, i) { return i ? x : x + "%"; })
-                                    .tickValues(color.domain()))
-                                  .select(".domain")
-                                    .remove();
-
-                                d3.queue()
-                                    .defer(d3.json, "https://d3js.org/us-10m.v1.json")
-                                    .defer(d3.tsv, "data/unemployment.tsv", function(d) { unemployment.set(d.id, +d.rate); })
-                                    .await(ready);
-
-                                function ready(error, us) {
-                                  if (error) throw error;
-
-                                  svg.append("g")
-                                      .attr("class", "counties")
-                                    .selectAll("path")
-                                    .data(topojson.feature(us, us.objects.counties).features)
-                                    .enter().append("path")
-                                      .attr("fill", function(d) { return color(d.rate = unemployment.get(d.id)); })
-                                      .attr("d", path)
-                                    .append("title")
-                                      .text(function(d) { return d.rate + "%"; });
-
-                                  svg.append("path")
-                                      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                                      .attr("class", "states")
-                                      .attr("d", path);
-                                }
-                            </script>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <br></br>
 
-        <!-- Count area -->
-        <div class="count-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <!-- /.feature title -->
-                        <h2>You can trust Us </h2> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
-                        <div class="row">
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-users"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent" id="counter">0</h2>
-                                        <h5>Happy Community </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-home"></span>
-                                    </div>
-                                    <div class="chart" data-percent="12000">
-                                        <h2 class="percent" id="counter1">0</h2>
-                                        <h5>Green Environment</h5>
-                                    </div>
-                                </div> 
-                            </div> 
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-flag"></span>
-                                    </div>
-                                    <div class="chart" data-percent="120">
-                                        <h2 class="percent" id="counter2">0</h2>
-                                        <h5>City registered </h5>
-                                    </div>
-                                </div> 
-                            </div> 
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-graph2"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent"  id="counter3">5000</h2>
-                                        <h5>Health organization partners</h5>
-                                    </div>
-                                </div> 
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- boy-sale area -->
-        <div class="boy-sale-area">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-6 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
-                        <div class="asks-first">
-                            <div class="asks-first-circle">
-                                <span class="fa fa-search"></span>
-                            </div>
-                            <div class="asks-first-info">
-                                <h2>ARE YOU LOOKING FOR An Area to Donate?</h2>
-                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>                                        
-                            </div>
-                            <div class="asks-first-arrow">
-                                <a href="properties.html"><span class="fa fa-angle-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-sm-offset-1 col-xs-12 col-md-offset-0">
-                        <div  class="asks-first">
-                            <div class="asks-first-circle">
-                                <span class="fa fa-usd"></span>
-                            </div>
-                            <div class="asks-first-info">
-                                <h2>DO YOU join a Health Org?</h2>
-                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>
-                            </div>
-                            <div class="asks-first-arrow">
-                                <a href="properties.html"><span class="fa fa-angle-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <p  class="asks-call">QUESTIONS? CALL US  : <span class="strong"> + 3-123- 424-5700</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer area-->
-        <div class="footer-area">
-
-            <div class=" footer">
-                <div class="container">
-                    <div class="row">
+              <svg width="960" height="600"></svg>
+              <!-- Footer area-->
+              <div class="footer-area">
+                <div class=" footer">
+                  <div class="container">
+                      <div class="row">
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
@@ -634,7 +453,7 @@
                 </div>
             </div>
 
-            <div class="footer-copy text-center">
+        <div class="footer-copy text-center">
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
@@ -654,13 +473,15 @@
 
         </div>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
-        <script src="http://d3js.org/d3.v4.min.js"></script>
-        <script src="http://d3js.org/queue.v1.min.js"></script>
-        <script src="http://d3js.org/topojson.v2.min.js"></script>
-        <script src="assets/js/d3-tip.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+        <script src="assets/js/healthmap.js"></script>
 
-        <script src="assets/js/world.js"></script>
+        <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        
+        <script src="http://d3js.org/queue.v1.min.js"></script>
+        <script src="assets/js/d3-tip.js"></script>
 
         <script src="assets/js/jquery-1.10.2.min.js"></script> 
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -679,4 +500,4 @@
         <script src="assets/js/main.js"></script>
 
     </body>
-</html>
+  </html>

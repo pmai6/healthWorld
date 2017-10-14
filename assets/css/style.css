@@ -156,16 +156,6 @@ input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
-.counties {
-  fill: none;
-}
-
-.states {
-  fill: none;
-  stroke: #fff;
-  stroke-linejoin: round;
-}
-
 .names {
   fill: none;
   stroke: #fff;
