@@ -74,9 +74,8 @@ function ready(error, data, population) {
             .style("stroke-width",0.3);
         })
         .on('click', function(d) {
-            console.log("here")
-            return btntest_onclick();
-          
+            d3.select("body").append("div").html("<a href='index-2.html'></a>");
+            console.log("here help")
         });
 
   svg.append("path")
@@ -84,8 +83,4 @@ function ready(error, data, population) {
        // .datum(topojson.mesh(data.features, function(a, b) { return a !== b; }))
       .attr("class", "names")
       .attr("d", path);
-
-  function btntest_onclick() {
-    window.location.href = "us.html";
-  }
 }
