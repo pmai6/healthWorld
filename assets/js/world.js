@@ -76,7 +76,7 @@ function ready(error, data, population) {
         .on('click', function(d) {
             console.log("here")
             return btntest_onclick();
-            
+          
         });
 
   svg.append("path")
