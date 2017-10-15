@@ -1,9 +1,9 @@
 
-      var svg = d3.select("svg"),
-              width = +svg.attr("width"),
-              height = +svg.attr("height");
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
 
-          var unemployment = d3.map();
+var unemployment = d3.map();
 
           var path = d3.geoPath();
 
