@@ -163,7 +163,7 @@
     }
 
     .slider-content {
-        top: 5%;
+        top: 0%;
     }
     .slider-area{
         height:440px; 
@@ -424,9 +424,11 @@
     }
     .navbar-brand img {
         width: 110px;
+        margin:0;
     }
     .navbar-default .navbar-nav > li > a {
         font-size: 13px;
+        margin : 0;
     }
     .nav-button {
         font-size: 13px;
@@ -435,6 +437,7 @@
     .navbar-nav > li > a {
         padding-left: 15px;
         padding-right: 6px;
+        margin : 0;
     }
     .main-nav {
         padding-top: 4px;
@@ -443,10 +446,12 @@
         bottom: -2px;
         height: 2px;
         width: 100%;
+        margin : 0;
     }
     .navbar-default .navbar-nav > li > a::after {
         bottom: -2px;
         height: 2px;
+        margin : 0;
     }
 
     .slider-content {
